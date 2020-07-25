@@ -13,5 +13,4 @@ class Tile(object):
     def __str__(self):
         if self.empty():
             return '-'
-        #print(self.piece)
         return str(self.piece)

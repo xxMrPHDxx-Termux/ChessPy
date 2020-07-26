@@ -2,6 +2,7 @@ from functools import reduce
 
 from piece import Piece
 from tile import Tile
+from player import Player
 
 class Board(object):
     DEFAULT = [
@@ -66,8 +67,18 @@ class Board(object):
             ],
             ([],[])
         )
+        self.__players = [
+            Player(a, self)
+            for a in 'WB'
+        ]
     @property
     def tiles(self): return self.__tiles
+    @property
+    def white_player(self):
+        return self.__players[0]
+    @property
+    def black_player(self):
+        return self.__players[1]
     def get_white_pieces(self):
         return self.__wp
     def get_black_pieces(self):

@@ -47,13 +47,11 @@ class Board(object):
                 else a[0]
             ).append(b)
             [
-                [(
+                (
                     self.__wm \
                     if b.is_white() \
                     else self.__bm
-                ).append(move),
-                print(b, b.is_white())
-                ]
+                ).append(move)
                 for move in b.calculate_moves(
                     self
                 )

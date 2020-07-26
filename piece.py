@@ -26,7 +26,7 @@ class Piece(object):
             return []
         p = self.pos
         d = -1 if a == 'W' else 1
-        if   t == 'QK':
+        if   t in 'QK':
             offs = [-9,-8,-7,-1,1,7,8,9]
         elif t == 'R':
             offs = [-8,-1,1,8]
@@ -35,15 +35,13 @@ class Piece(object):
         elif t == 'N':
             offs = [-17,-15,-10,-6,6,10,15,17]
         else:
-            offs = [7,8,9,16]
+            offs = [i*d for i in [7,8,9,16]]
         moves = [
             list(utils.get_moves(
                 b, 
                 self, 
                 p+o, 
-                o
-                if not t == 'P'
-                else (o*d),
+                o,
                 t in 'RBQ'
             ))
             for o in offs
@@ -56,12 +54,12 @@ class Piece(object):
             []
         )
     def has_exclusion(self, p, o):
-        t, a = self.type, self.ally
-        r, c = p//8, p%8
+        t, d = self.type, p+o
+        c, cc = p%8, d%8
         if not t in 'RNBQKP':
             return False
-        b, d = (1,6) if t == 'N' else (0,7)
-        return c <= b or c >= d
+        b = 1 if t == 'N' else 0
+        return abs(cc-c) > b
     def __str__(self):
         return (
             (lambda x: x.lower())

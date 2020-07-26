@@ -24,4 +24,4 @@ class Move(object):
             else ('', '->')
         c = f'{ap}{d}' if att else str(d)
         return a + \
-            f'Move[{p}{pos}{b}{c}'
+            f'Move[{p}{pos}{b}{c}]'

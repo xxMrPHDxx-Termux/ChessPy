@@ -8,11 +8,14 @@ def get_moves(b, p, d, o, loop=False):
         t = b[d]
         if not t.empty():
             ap = t.piece
-            if ap.ally != p.ally:
+            if ap.ally != p.ally \
+                and p.type != 'P' \
+                and abs(o)%8 != 0:
                 yield Move(b, p, d, ap)
             if loop:
                 return
-        else:
+        elif not (p.type == 'P' \
+            and abs(o)%8 != 0):
             yield Move(b, p, d)
         if not valid(d+o) or \
             p.has_exclusion(d, o) or \

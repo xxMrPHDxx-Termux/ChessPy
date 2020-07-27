@@ -71,6 +71,9 @@ class Board(object):
             Player(a, self)
             for a in 'WB'
         ]
+        self.__cp = self.__players[
+            'WB'.index(move_maker)
+        ]
     @property
     def tiles(self): return self.__tiles
     @property
@@ -79,6 +82,14 @@ class Board(object):
     @property
     def black_player(self):
         return self.__players[1]
+    @property
+    def current_player(self):
+        return self.__cp
+    @property
+    def opponent_player(self):
+        return self.white_player \
+            if self.__cp == self.black_player \
+            else self.black_player
     def get_white_pieces(self):
         return self.__wp
     def get_black_pieces(self):

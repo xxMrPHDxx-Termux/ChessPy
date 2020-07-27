@@ -27,6 +27,29 @@ class Player(object):
     def moves(self): return self.__m
     @property
     def king(self): return self.__k
+    def __eq__(self, o):
+        if not isinstance(o, Player):
+            return False
+        return all([
+            self.ally == o.ally,
+            len(self.pieces) == len(o.pieces),
+            len(self.moves) == len(o.moves),
+            self.king == o.king,
+            all([
+                a == b
+                for a, b in zip(
+                    self.pieces,
+                    o.pieces
+                )
+            ]),
+            all([
+                a == b
+                for a, b in zip(
+                    self.moves,
+                    o.moves
+                )
+            ])
+        ])
     def __str__(self):
         return (
             'White'

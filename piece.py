@@ -60,6 +60,15 @@ class Piece(object):
             return False
         b = 1 if t == 'N' else 0
         return abs(cc-c) > b
+    def __eq__(self, o):
+        if not isinstance(o, Piece):
+            return False
+        return all([
+            self.type == o.type,
+            self.ally == o.ally,
+            self.pos == o.pos,
+            self.fm == o.fm
+        ])
     def __str__(self):
         return (
             (lambda x: x.lower())

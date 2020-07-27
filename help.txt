@@ -1,0 +1,8 @@
+/*********************************/
+/*              HELP             */
+/*********************************/
+
+  'q' or 'quit'    - Quit the game
+  'h' or 'help'    - Show this help
+  'm' or 'move'    - Move piece
+  'cls' or 'clear' - Clear the screen

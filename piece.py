@@ -54,12 +54,20 @@ class Piece(object):
             []
         )
     def has_exclusion(self, p, o):
-        t, d = self.type, p+o
-        c, cc = p%8, d%8
+        t = self.type
         if not t in 'RNBQKP':
             return False
-        b = 1 if t == 'N' else 0
-        return abs(cc-c) > b
+        m = p%8
+        return any([
+            m == 0 and o in [
+                -17,-10,-9,-1,6,7,15
+            ],
+            m == 7 and o in [
+                -15,-7,-6,1,9,10,17
+            ],
+            m == 1 and o in [-10,6],
+            m == 6 and o in [-6,10]
+        ])
     def __eq__(self, o):
         if not isinstance(o, Piece):
             return False

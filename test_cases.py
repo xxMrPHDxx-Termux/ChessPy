@@ -75,6 +75,28 @@ def test_board_compare():
     assert b2 == b3, 'Should be equal'
     assert b != b3, 'Should not equal'
 
+def test_move_rook():
+    b = Board([
+        -1, 0, 0, 0,-5, 0, 0,-1,
+        *[0 for _ in range(48)],
+         1, 0, 0, 0, 5, 0, 0, 1
+    ], 'W', {
+        i: False for i in [0, 7, 56, 63]
+    })
+    def is_rooks_move(moves):
+        return [
+            m
+            for m in moves
+            if m.piece.type == 'R'
+        ]
+    wp, bp = b.current_player, b.opponent_player
+    wm = is_rooks_move(wp.moves)
+    bm = is_rooks_move(bp.moves)
+    assert len(wm) == 19, \
+        'White rook should have 19 moves'
+    assert len(bm) == 19, \
+        'Black rook should have 19 moves'
+
 def test_move_execution():
     m = [
         m

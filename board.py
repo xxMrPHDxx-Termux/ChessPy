@@ -15,7 +15,8 @@ class Board(object):
     def __init__(
             self, 
             cfg=DEFAULT,
-            move_maker='W'):
+            move_maker='W',
+            states={}):
         self.__tiles = [
             (
                 lambda x: Tile(
@@ -30,7 +31,9 @@ class Board(object):
                             else 1
                         ],
                         i,
-                        True
+                        True \
+                        if not i in states \
+                        else states[i]
                     )
                 )
             )(

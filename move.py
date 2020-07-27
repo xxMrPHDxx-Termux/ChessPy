@@ -36,7 +36,8 @@ class Move(object):
             config,
             'B' \
             if self.piece.ally == 'W' \
-            else 'W'
+            else 'W',
+            states
         )
     def __eq__(self, o):
         if not isinstance(o, Move):

@@ -45,3 +45,16 @@ def test_player_compare():
     assert p1 != p2, 'Should not equal'
     assert p2 != p3, 'Should not equal'
     assert p1 == p3, 'Should be equal'
+
+def test_move_execution():
+    m = [
+        m
+        for m in b.current_player.moves
+        if m.pos == 57 and m.dest == 40
+    ]
+    assert len(m) == 1, \
+        'Should found 1 move only'
+    m = m[0]
+    b2 = m.execute()
+    assert not b2[40].piece.fm, \
+        'Should not be first move anymore'

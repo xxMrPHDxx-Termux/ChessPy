@@ -1,7 +1,8 @@
-from board import *
 from piece import Piece
+from tile import Tile
 from move import Move
 from player import Player
+from board import Board
 
 b = Board()
 
@@ -25,6 +26,13 @@ def test_piece_compare():
     assert p2 == p3, 'Should be equal'
     assert p1 != p3, 'Should not equal'
 
+def test_tile_compare():
+    t1, t2 = b[0:2]
+    t3 = Tile(1,Piece('N','B',1,True))
+    assert t1 != t2, 'Should not equal'
+    assert t2 == t3, 'Should be equal'
+    assert t1 != t3, 'Should not equal'
+
 def test_move_compare():
     p = b[1].piece
     m1 = [
@@ -45,6 +53,27 @@ def test_player_compare():
     assert p1 != p2, 'Should not equal'
     assert p2 != p3, 'Should not equal'
     assert p1 == p3, 'Should be equal'
+
+def test_board_compare():
+    m = [
+        m
+        for m in b.current_player.moves
+        if m.pos == 57 and m.dest == 40
+    ]
+    assert len(m) == 1, \
+        'Should found 1 move only'
+    b2 = m[0].execute()
+    b3 = Board([
+        -1,-2,-3,-4,-5,-3,-2,-1,
+        *[-6 for _ in range(8)],
+        *[0 for _ in range(24)],
+         2, 0, 0, 0, 0, 0, 0, 0,
+        *[ 6 for _ in range(8)],
+         1, 0, 3, 4, 5, 3, 2, 1
+    ],'B',{40:False})
+    assert b != b2, 'Should not equal'
+    assert b2 == b3, 'Should be equal'
+    assert b != b3, 'Should not equal'
 
 def test_move_execution():
     m = [

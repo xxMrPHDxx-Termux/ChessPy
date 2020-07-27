@@ -108,6 +108,16 @@ class Board(object):
             r, c = arg
             return self.tiles[r*8+c]
         return self.tiles[arg]
+    def __eq__(self, o):
+        if not isinstance(o, Board):
+            return False
+        cp = o.current_player
+        op = o.opponent_player
+        return all([
+            self.tiles == o.tiles,
+            self.current_player == cp,
+            self.opponent_player == op
+        ])
     def __str__(self):
         return '\n'.join([
             ' '.join([

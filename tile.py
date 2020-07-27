@@ -10,6 +10,13 @@ class Tile(object):
         return self.piece == None
     def occupied(self):
         return not self.empty()
+    def __eq__(self, o):
+        if not isinstance(o, Tile):
+            return False
+        return all([
+            self.pos == o.pos,
+            self.piece == o.piece
+        ])
     def __str__(self):
         if self.empty():
             return '-'
